@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {View, Text, FlatList, Alert, StyleSheet} from 'react-native';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
 import AddItem from './components/AddItem';
@@ -19,9 +19,13 @@ const App = () => {
   };
 
   const addItem = text => {
-    setItems(prevItems => {
-      return [{id: Math.random(), text}, ...prevItems];
-    });
+    if (!text) {
+      Alert.alert('Error', 'Please enter an item', [{text: 'Ok'}]);
+    } else {
+      setItems(prevItems => {
+        return [{id: Math.random(), text}, ...prevItems];
+      });
+    }
   };
 
   return (
